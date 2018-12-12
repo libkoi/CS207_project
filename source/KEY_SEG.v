@@ -202,7 +202,9 @@ always @ (keyboard_val)
 //  .clk(clk),                // input wire clk
 //  .probe_out0(seg_out)  // output wire [7 : 0] probe_out0
 //);
-endmodule`timescale 1ns / 1ps
+endmodule
+
+`timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
 // Engineer: 
