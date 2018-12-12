@@ -18,7 +18,10 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-module clock(input clk, rst, output[5:0] hour, minute, second);
+module clock(input clk, rst,[3:0]hour1,[3:0]hour0,[3:0]minute1,[3:0]minute0, output[5:0] hour, minute, second);
+//四个输入设置时间的输入分别代表小时的十位、个位、分钟的十位、个位。输入为A代表不用设置
+//这个模块不想处理输入时间的异常，希望传入模块已做好异常处理
+//三个输出直接用六位二进制数表示时分秒
     wire[0:0] clk_bps;
     reg[5:0] reg_hour,reg_minute,reg_second;
     counter u_c(clk,rst,clk_bps);
@@ -62,6 +65,26 @@ module clock(input clk, rst, output[5:0] hour, minute, second);
                 reg_hour<=reg_hour+1'b1;
         end        
     end
+    
+    //设置时间代码开始
+    //这段代码可能有错，也可能会与时钟的跳动产生冲突，待测试
+    always @(posedge clk)
+    begin
+        if(hour1!=4'hA&&hour0!=4'hA)
+        begin
+            reg_hour=6'd0;
+            reg_hour=reg_hour+hour0;
+            reg_hour=reg_hour+hour1*10;
+        end
+        if(minute1!=4'hA&&minute0!=4'hA)
+        begin
+            reg_minute=6'd0;
+            reg_minute=reg_minute+minute0;
+            reg_minute=reg_minute+minute1*10;
+        end
+    end
+    //设置时间代码结束
+    
     assign hour=reg_hour;
     assign minute=reg_minute;
     assign second=reg_second;
