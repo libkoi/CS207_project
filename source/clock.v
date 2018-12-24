@@ -117,7 +117,7 @@ endmodule
 
 
 module counter_tube(input clk, rst,output clk_bps_tube);
-// 0.05 s per posedge
+// 0.002 s per posedge, stable enough
     reg [13:0] cnt_first, cnt_second;
     always @(posedge clk or posedge rst)
         if(rst)
@@ -129,9 +129,9 @@ module counter_tube(input clk, rst,output clk_bps_tube);
     always @(posedge clk or posedge rst)
         if(rst)
             cnt_second<=14'd0;
-        else if(cnt_second==14'd500)
+        else if(cnt_second==14'd20)
             cnt_second<=14'd0;
         else if(cnt_first==14'd10000)
             cnt_second<=cnt_second+1'b1;
-    assign clk_bps_tube= cnt_second == 14'd500 ? 1'b1:1'b0;
+    assign clk_bps_tube= cnt_second == 14'd20 ? 1'b1:1'b0;
 endmodule
