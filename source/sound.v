@@ -12,7 +12,7 @@ output speak
     always@ (posedge clk)
 
     begin
-    if(min==6'd0)
+    if(min==6'd1)
     begin
         case(sec)
         6'd0: sound=20'd113636;
