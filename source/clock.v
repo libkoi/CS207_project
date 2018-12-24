@@ -21,38 +21,54 @@
 module clock(
 input clk, 
 rst,
- set,
-[3:0]hour1,
-[3:0]hour0,
-[3:0]minute1,
-[3:0]minute0, 
-output[5:0] hour, 
-minute, 
-second);
+h,
+min,
+ set_time,
+[5:0] key_hour,
+[5:0] key_minute, 
+output reg[5:0] hour, 
+output reg[5:0] minute, 
+output reg[5:0] second);
 //四个输入设置时间的输入分别代表小时的十位、个位、分钟的十位、个位。输入为A代表不用设置
 //这个模块不想处理输入时间的异常，希望传入模块已做好异常处理
 //三个输出直接用六位二进制数表示时分秒
-    wire[0:0] clk_bps;
-    
+    wire clk_bps;
     reg[5:0] reg_hour,reg_minute,reg_second;
     counter u_c(clk,rst,clk_bps);
-    always @(posedge clk or posedge rst)
-        if(rst)
-        begin
-            reg_hour<=6'd0;
-            reg_minute<=6'd0;
-            reg_second<=6'd0;
-        end
-    always @(posedge clk_bps)
+    always @(posedge clk)
     begin
-        if(reg_second==6'd59)
+        hour=reg_hour;
+        minute=reg_minute;
+        second=reg_second;
+//        if(rst)
+//        begin
+//            reg_hour<=6'b001_010;
+//            reg_minute<=6'b000_111;
+//            reg_second<=6'b100_111;
+//        end
+    end
+    
+    always @(posedge clk_bps or posedge rst)
+    begin
+        if(rst)
+            reg_second<=6'b000000;
+        else if(reg_second==6'd59)
             reg_second<=6'd0;
         else
             reg_second<=reg_second+1'b1;
     end
-    always @(posedge clk_bps)
+    reg m;
+    always @(posedge clk_bps or posedge rst or posedge min)
         begin
-            if(reg_minute==6'd59 )
+            if(rst)
+                reg_minute<=6'b000000;
+            else if(min==(01))
+            begin
+                reg_minute<=reg_minute+1'b1;
+//                    reg_minute=key_hour;
+//                    reg_minute=reg_minute%60;
+            end    
+            else if(reg_minute==6'd59 )
             begin
                 if(reg_second==6'd59)
                 reg_minute<=6'd0;
@@ -60,9 +76,17 @@ second);
             else if(reg_second==6'd59)
                 reg_minute<=reg_minute+1'b1;
         end
-    always @(posedge clk_bps)
+    always @(posedge clk_bps , posedge rst ,posedge h)
     begin
-        if(reg_hour==6'd23 )
+        if(rst)
+            reg_hour<=6'b000000;
+//        else if(h)
+//            reg_hour<=reg_hour+1'b1;
+//        begin
+//            reg_hour=key_hour;
+//            reg_hour=reg_hour%24;
+//        end
+        else if(reg_hour==6'd23 )
         begin
             if(reg_minute==6'd59)
             begin
@@ -77,23 +101,8 @@ second);
         end        
     end
     
-    //设置时间代码开始
-    //这段代码可能有错，也可能会与时钟的跳动产生冲突，待测试
-    always @(posedge set, posedge rst)
-    begin
-            reg_hour=hour0;
-            reg_hour=reg_hour+hour1*10;
-            reg_hour=reg_hour%24;
-
-            reg_minute=reg_minute+minute0;
-            reg_minute=reg_minute+minute1*10;
-            reg_minute=reg_minute%60;
-    end
-    //设置时间代码结束
     
-    assign hour=reg_hour;
-    assign minute=reg_minute;
-    assign second=reg_second;
+
 endmodule
 
 module counter(input clk, rst,output clk_bps);
@@ -113,25 +122,4 @@ module counter(input clk, rst,output clk_bps);
         else if(cnt_first==14'd10000)
             cnt_second<=cnt_second+1'b1;
     assign clk_bps= cnt_second == 14'd10000 ? 1'b1:1'b0;
-endmodule
-
-
-module counter_tube(input clk, rst,output clk_bps_tube);
-// 0.002 s per posedge, stable enough
-    reg [13:0] cnt_first, cnt_second;
-    always @(posedge clk or posedge rst)
-        if(rst)
-            cnt_first<=14'd0;
-        else if(cnt_first==14'd10000)
-            cnt_first<=14'd0;
-        else
-            cnt_first<=cnt_first+1'b1;
-    always @(posedge clk or posedge rst)
-        if(rst)
-            cnt_second<=14'd0;
-        else if(cnt_second==14'd20)
-            cnt_second<=14'd0;
-        else if(cnt_first==14'd10000)
-            cnt_second<=cnt_second+1'b1;
-    assign clk_bps_tube= cnt_second == 14'd20 ? 1'b1:1'b0;
 endmodule
