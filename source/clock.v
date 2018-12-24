@@ -79,7 +79,7 @@ second);
     
     //设置时间代码开始
     //这段代码可能有错，也可能会与时钟的跳动产生冲突，待测试
-    always @(posedge set)
+    always @(posedge set, posedge rst)
     begin
             reg_hour=hour0;
             reg_hour=reg_hour+hour1*10;
