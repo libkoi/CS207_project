@@ -18,11 +18,22 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-module clock(input clk, rst,[3:0]hour1,[3:0]hour0,[3:0]minute1,[3:0]minute0, output[5:0] hour, minute, second);
-//å››ä¸ªè¾“å…¥è®¾ç½®æ—¶é—´çš„è¾“å…¥åˆ†åˆ«ä»£è¡¨å°æ—¶çš„åä½ã€ä¸ªä½ã€åˆ†é’Ÿçš„åä½ã€ä¸ªä½ã€‚è¾“å…¥ä¸ºAä»£è¡¨ä¸ç”¨è®¾ç½®
-//è¿™ä¸ªæ¨¡å—ä¸æƒ³å¤„ç†è¾“å…¥æ—¶é—´çš„å¼‚å¸¸ï¼Œå¸Œæœ›ä¼ å…¥æ¨¡å—å·²åšå¥½å¼‚å¸¸å¤„ç†
-//ä¸‰ä¸ªè¾“å‡ºç›´æ¥ç”¨å…­ä½äºŒè¿›åˆ¶æ•°è¡¨ç¤ºæ—¶åˆ†ç§’
+module clock(
+input clk, 
+rst,
+ set,
+[3:0]hour1,
+[3:0]hour0,
+[3:0]minute1,
+[3:0]minute0, 
+output[5:0] hour, 
+minute, 
+second);
+//ËÄ¸öÊäÈëÉèÖÃÊ±¼äµÄÊäÈë·Ö±ğ´ú±íĞ¡Ê±µÄÊ®Î»¡¢¸öÎ»¡¢·ÖÖÓµÄÊ®Î»¡¢¸öÎ»¡£ÊäÈëÎªA´ú±í²»ÓÃÉèÖÃ
+//Õâ¸öÄ£¿é²»Ïë´¦ÀíÊäÈëÊ±¼äµÄÒì³££¬Ï£Íû´«ÈëÄ£¿éÒÑ×öºÃÒì³£´¦Àí
+//Èı¸öÊä³öÖ±½ÓÓÃÁùÎ»¶ş½øÖÆÊı±íÊ¾Ê±·ÖÃë
     wire[0:0] clk_bps;
+    
     reg[5:0] reg_hour,reg_minute,reg_second;
     counter u_c(clk,rst,clk_bps);
     always @(posedge clk or posedge rst)
@@ -66,24 +77,19 @@ module clock(input clk, rst,[3:0]hour1,[3:0]hour0,[3:0]minute1,[3:0]minute0, out
         end        
     end
     
-    //è®¾ç½®æ—¶é—´ä»£ç å¼€å§‹
-    //è¿™æ®µä»£ç å¯èƒ½æœ‰é”™ï¼Œä¹Ÿå¯èƒ½ä¼šä¸æ—¶é’Ÿçš„è·³åŠ¨äº§ç”Ÿå†²çªï¼Œå¾…æµ‹è¯•
-    always @(posedge clk)
+    //ÉèÖÃÊ±¼ä´úÂë¿ªÊ¼
+    //Õâ¶Î´úÂë¿ÉÄÜÓĞ´í£¬Ò²¿ÉÄÜ»áÓëÊ±ÖÓµÄÌø¶¯²úÉú³åÍ»£¬´ı²âÊÔ
+    always @(posedge set)
     begin
-        if(hour1!=4'hA&&hour0!=4'hA)
-        begin
-            reg_hour=6'd0;
-            reg_hour=reg_hour+hour0;
+            reg_hour=hour0;
             reg_hour=reg_hour+hour1*10;
-        end
-        if(minute1!=4'hA&&minute0!=4'hA)
-        begin
-            reg_minute=6'd0;
+            reg_hour=reg_hour%24;
+
             reg_minute=reg_minute+minute0;
             reg_minute=reg_minute+minute1*10;
-        end
+            reg_minute=reg_minute%60;
     end
-    //è®¾ç½®æ—¶é—´ä»£ç ç»“æŸ
+    //ÉèÖÃÊ±¼ä´úÂë½áÊø
     
     assign hour=reg_hour;
     assign minute=reg_minute;
