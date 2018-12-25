@@ -34,6 +34,7 @@ output reg[5:0] second);
 //三个输出直接用六位二进制数表示时分秒
     wire clk_bps;
     reg[5:0] reg_hour,reg_minute,reg_second;
+    
     counter u_c(clk,rst,clk_bps);
     always @(posedge clk)
     begin
@@ -57,17 +58,30 @@ output reg[5:0] second);
         else
             reg_second<=reg_second+1'b1;
     end
-    reg m;
-    always @(posedge clk_bps or posedge rst or posedge min)
+    reg[2:0] mm;
+    reg[2:0] mh;
+    reg cm;
+    reg ch;
+    always @(posedge min or posedge cm)
+    begin
+        mm<=mm+1;
+        if(cm)
+            mm<=0;
+     end
+    always @(posedge h)
+        mh<=mh+1;
+    always @(posedge clk_bps or posedge rst)
         begin
             if(rst)
                 reg_minute<=6'b000000;
-            else if(min==(01))
-            begin
-                reg_minute<=reg_minute+1'b1;
-//                    reg_minute=key_hour;
-//                    reg_minute=reg_minute%60;
-            end    
+//            else if(min)
+//                reg_minute<=reg_minute+1;
+//            else if(min==(01))
+//            begin
+//                reg_minute<=reg_minute+1'b1;
+////                    reg_minute=key_hour;
+////                    reg_minute=reg_minute%60;
+//            end    
             else if(reg_minute==6'd59 )
             begin
                 if(reg_second==6'd59)
@@ -75,11 +89,16 @@ output reg[5:0] second);
             end
             else if(reg_second==6'd59)
                 reg_minute<=reg_minute+1'b1;
+            reg_minute<=reg_minute+mm;
+            cm<=1;
+            #100
+            cm<=0;
         end
-    always @(posedge clk_bps , posedge rst ,posedge h)
+    always @(posedge clk_bps , posedge rst )
     begin
         if(rst)
             reg_hour<=6'b000000;
+
 //        else if(h)
 //            reg_hour<=reg_hour+1'b1;
 //        begin
