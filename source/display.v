@@ -59,9 +59,9 @@ reg [7:0] sl_r;
 //////////////////////////////////////////////////////////
 // display convert toolkit
 // [5:0] time --> [3:0] digit
-always @(posedge clk or negedge rst)
+always @(posedge clk or posedge rst)
 begin
-    if(!rst) begin
+    if(rst) begin
         hh <= 0;
         hl <= 0;
         mh <= 0;
@@ -84,9 +84,9 @@ reg clkout;
 //////////////////////////////////////////////////////////
 // frequency division 
 // clk --> clkout
-always @(posedge clk or negedge rst) 
+always @(posedge clk or posedge rst) 
 begin
-    if(!rst) begin
+    if(rst) begin
         cnt <= 0;
         clkout <= 0;
     end
@@ -105,9 +105,9 @@ end
  // scan clock generate
  // clkout --> scan_cnt 
  // scan_cnt repeat 0 -> 7
-always @(posedge clkout or negedge rst)
+always @(posedge clkout or posedge rst)
 begin
-    if(!rst)
+    if(rst)
         scan_cnt <= 0;
     else
         begin
@@ -153,7 +153,7 @@ reg [7:0] Xseg_out;
 always @(Q)
 begin
     case (Q[3:0])
-    	4'd0: Xseg_out<=8'b01000000;
+        4'd0: Xseg_out<=8'b01000000;
         4'd1: Xseg_out<=8'b01111001;
         4'd2: Xseg_out<=8'b00100100;
         4'd3: Xseg_out<=8'b00110000;

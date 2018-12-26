@@ -1,8 +1,8 @@
 `timescale 1ns / 1ps
 
 module sound(
-input on,clk,bell,
-input [5:0] min,[5:0] sec,[5:0] hour,
+input on,clk,
+input [5:0] hour,[5:0] min,[5:0] sec,
 output speak
     );
     reg[19:0] sound;
