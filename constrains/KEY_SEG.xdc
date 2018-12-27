@@ -1,11 +1,3 @@
-set_property IOSTANDARD LVCMOS33 [get_ports {col[3]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {col[2]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {col[1]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {col[0]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {row[3]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {row[2]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {row[1]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {row[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {seg_en[7]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {seg_en[6]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {seg_en[5]}]
@@ -26,16 +18,9 @@ set_property IOSTANDARD LVCMOS33 [get_ports clk]
 set_property IOSTANDARD LVCMOS33 [get_ports rst]
 set_property IOSTANDARD LVCMOS33 [get_ports h]
 set_property IOSTANDARD LVCMOS33 [get_ports min]
-set_property IOSTANDARD LVCMOS33 [get_ports change]
 set_property IOSTANDARD LVCMOS33 [get_ports on]
 set_property IOSTANDARD LVCMOS33 [get_ports speak]
-set_property IOSTANDARD LVCMOS33 [get_ports next]
 set_property IOSTANDARD LVCMOS33 [get_ports sound_on]
-
-#set_property IOSTANDARD LVCMOS33 [get_ports {val[3]}]
-#set_property IOSTANDARD LVCMOS33 [get_ports {val[2]}]
-#set_property IOSTANDARD LVCMOS33 [get_ports {val[1]}]
-#set_property IOSTANDARD LVCMOS33 [get_ports {val[0]}]
 
 set_property IOSTANDARD LVCMOS33 [get_ports {hour[5]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {hour[4]}]
@@ -56,25 +41,6 @@ set_property IOSTANDARD LVCMOS33 [get_ports {second[2]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {second[1]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {second[0]}]
 
-set_property IOSTANDARD LVCMOS33 [get_ports {twink[2]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {twink[1]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {twink[0]}]
-
-
-
-
-
-
-set_property PACKAGE_PIN M2 [get_ports {col[3]}]
-set_property PACKAGE_PIN K6 [get_ports {col[2]}]
-set_property PACKAGE_PIN J6 [get_ports {col[1]}]
-set_property PACKAGE_PIN L5 [get_ports {col[0]}]
-
-set_property PACKAGE_PIN K4 [get_ports {row[3]}]
-set_property PACKAGE_PIN J4 [get_ports {row[2]}]
-set_property PACKAGE_PIN L3 [get_ports {row[1]}]
-set_property PACKAGE_PIN K3 [get_ports {row[0]}]
-
 
 
 set_property PACKAGE_PIN C19 [get_ports {seg_en[0]}]
@@ -86,46 +52,22 @@ set_property PACKAGE_PIN B20 [get_ports {seg_en[5]}]
 set_property PACKAGE_PIN A20 [get_ports {seg_en[6]}]
 set_property PACKAGE_PIN A18 [get_ports {seg_en[7]}]
 
-#set_property PACKAGE_PIN E13 [get_ports {seg_out[0]}]
-#set_property PACKAGE_PIN C15 [get_ports {seg_out[1]}]
-#set_property PACKAGE_PIN C14 [get_ports {seg_out[2]}]
-#set_property PACKAGE_PIN E17 [get_ports {seg_out[3]}]
-
-#set_property PACKAGE_PIN F16 [get_ports {seg_out[4]}]
-#set_property PACKAGE_PIN F14 [get_ports {seg_out[5]}]
-#set_property PACKAGE_PIN F13 [get_ports {seg_out[6]}]
-#set_property PACKAGE_PIN F15 [get_ports {seg_out[7]}]
-
-
 set_property PACKAGE_PIN F15 [get_ports {seg_out[0]}]
 set_property PACKAGE_PIN F13 [get_ports {seg_out[1]}]
 set_property PACKAGE_PIN F14 [get_ports {seg_out[2]}]
 set_property PACKAGE_PIN F16 [get_ports {seg_out[3]}]
-
 set_property PACKAGE_PIN E17 [get_ports {seg_out[4]}]
 set_property PACKAGE_PIN C14 [get_ports {seg_out[5]}]
 set_property PACKAGE_PIN C15 [get_ports {seg_out[6]}]
 set_property PACKAGE_PIN E13 [get_ports {seg_out[7]}]
 
-
-
-
-
 set_property PACKAGE_PIN Y18 [get_ports clk]
 set_property PACKAGE_PIN P20 [get_ports rst]
-set_property PACKAGE_PIN P4 [get_ports change]
 set_property PACKAGE_PIN W4 [get_ports on]
 set_property PACKAGE_PIN A19 [get_ports speak]
 set_property PACKAGE_PIN R1 [get_ports min]
 set_property PACKAGE_PIN P1 [get_ports h]
 set_property PACKAGE_PIN A21 [get_ports sound_on]
-
-#≤‚ ‘”√
-
-#set_property PACKAGE_PIN K17 [get_ports {val[0]}]
-#set_property PACKAGE_PIN L13 [get_ports {val[1]}]
-#set_property PACKAGE_PIN M13 [get_ports {val[2]}]
-#set_property PACKAGE_PIN K14 [get_ports {val[3]}]
 
 set_property PACKAGE_PIN K17 [get_ports {hour[5]}]
 set_property PACKAGE_PIN L13 [get_ports {hour[4]}]
@@ -145,10 +87,6 @@ set_property PACKAGE_PIN G21 [get_ports {second[3]}]
 set_property PACKAGE_PIN D21 [get_ports {second[2]}]
 set_property PACKAGE_PIN E21 [get_ports {second[1]}]
 set_property PACKAGE_PIN D22 [get_ports {second[0]}]
-
-set_property PACKAGE_PIN N19 [get_ports {twink[2]}]
-set_property PACKAGE_PIN L14 [get_ports {twink[1]}]
-set_property PACKAGE_PIN J17 [get_ports {twink[0]}]
 
 set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets reset_IBUF]
 set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets next_IBUF]
