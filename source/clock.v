@@ -19,16 +19,18 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 module clock(
-input clk, 
-rst,
-h,
-min,
- set_time,
-[5:0] key_hour,
-[5:0] key_minute, 
-output reg[5:0] hour, 
-output reg[5:0] minute, 
-output reg[5:0] second);
+    input clk, 
+    rst,
+    h,
+    min,
+    set_time,
+    [5:0] key_hour,
+    [5:0] key_minute, 
+    output reg[5:0] hour, 
+    output reg[5:0] minute, 
+    output reg[5:0] second
+
+);
 //四个输入设置时间的输入分别代表小时的十位、个位、分钟的十位、个位。输入为A代表不用设置
 //这个模块不想处理输入时间的异常，希望传入模块已做好异常处理
 //三个输出直接用六位二进制数表示时分秒

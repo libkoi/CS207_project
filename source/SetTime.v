@@ -21,15 +21,19 @@
 
 
 module SetTime(
-input clk,
-input rst,
-input start,
-input next,
-input [3:0] row, 
-output [3:0] col,
-output[5:0] hour, 
-minute,  
-output [2:0] twinkle);//闪烁数位，也就是当前设置数位，0_00时针十位，0_01时针个位，0_10分针十位，0_11分针个位
+    input clk,
+    input rst,
+    input start,
+    input next,
+    input [3:0] row, 
+    output [3:0] col,
+    output[5:0] hour, 
+    minute,  
+    output [2:0] twinkle  // twinkle digit (current setting digit)
+        //0_00 --> hour(large), 0_01 --> hour(small)
+        //0_10 --> minute(large), 0_11 --> minute(small)
+);
+
 wire[3:0] val;
 reg[5:0] hour,minute;
 reg[2:0] twinkle;

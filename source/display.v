@@ -32,11 +32,9 @@ module display(
 
 reg [2:0] scan_cnt;         // scan count, 0 --> 7
 reg [31:0] cnt;
-parameter period = 200000; // 500Hz for stable
+parameter period = 200000;  // 500Hz for stable
 
-//reg [6:0] Y_r;              // for selection
 reg [7:0] DIG_r;            // for one digit
-//assign seg_en = {1'b1, (~Y_r[6:0])};   // dot never light
 assign seg_out = Xseg_out;
 assign seg_en = ~DIG_r;
 
