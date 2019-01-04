@@ -1,37 +1,18 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 2016/11/02 11:01:06
-// Design Name: 
-// Module Name: key_top
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
 
 
 module get_key(
   input           clk,
   input           rst,
-  input      [3:0] row,                 // ¾ØÕó¼üÅÌ ÐÐ
+  input      [3:0] row,                 // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
   output reg[3:0] col,
-  output[3:0] keyboardval//Ö±½ÓÊä³öµÄ²¿·Ö
+  output[3:0] keyboardval//Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½
 );
  
 //++++++++++++++++++++++++++++++++++++++
-// ·ÖÆµ²¿·Ö ¿ªÊ¼
+// ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ê¼
 //++++++++++++++++++++++++++++++++++++++
-reg [19:0] cnt;                         // ¼ÆÊý×Ó
+reg [19:0] cnt;                         // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 wire key_clk;
  
 always @ (posedge clk or posedge rst)
@@ -42,21 +23,21 @@ always @ (posedge clk or posedge rst)
     
 assign key_clk = cnt[19];                // (2^20/50M = 21)ms 
 //--------------------------------------
-// ·ÖÆµ²¿·Ö ½áÊø
+// ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 //--------------------------------------
  
 //++++++++++++++++++++++++++++++++++++++
-// ×´Ì¬»ú²¿·Ö ¿ªÊ¼
+// ×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ê¼
 //++++++++++++++++++++++++++++++++++++++
-// ×´Ì¬Êý½ÏÉÙ£¬¶ÀÈÈÂë±àÂë
-parameter NO_KEY_PRESSED = 6'b000_001;  // Ã»ÓÐ°´¼ü°´ÏÂ  
-parameter SCAN_COL0      = 6'b000_010;  // É¨ÃèµÚ0ÁÐ 
-parameter SCAN_COL1      = 6'b000_100;  // É¨ÃèµÚ1ÁÐ 
-parameter SCAN_COL2      = 6'b001_000;  // É¨ÃèµÚ2ÁÐ 
-parameter SCAN_COL3      = 6'b010_000;  // É¨ÃèµÚ3ÁÐ 
-parameter KEY_PRESSED    = 6'b100_000;  // ÓÐ°´¼ü°´ÏÂ
+// ×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½Ù£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+parameter NO_KEY_PRESSED = 6'b000_001;  // Ã»ï¿½Ð°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
+parameter SCAN_COL0      = 6'b000_010;  // É¨ï¿½ï¿½ï¿½0ï¿½ï¿½ 
+parameter SCAN_COL1      = 6'b000_100;  // É¨ï¿½ï¿½ï¿½1ï¿½ï¿½ 
+parameter SCAN_COL2      = 6'b001_000;  // É¨ï¿½ï¿½ï¿½2ï¿½ï¿½ 
+parameter SCAN_COL3      = 6'b010_000;  // É¨ï¿½ï¿½ï¿½3ï¿½ï¿½ 
+parameter KEY_PRESSED    = 6'b100_000;  // ï¿½Ð°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-reg [5:0] current_state, next_state;    // ÏÖÌ¬¡¢´ÎÌ¬
+reg [5:0] current_state, next_state;    // ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½Ì¬
  
 always @ (posedge key_clk or posedge rst)
   if (rst)
@@ -64,45 +45,45 @@ always @ (posedge key_clk or posedge rst)
   else
     current_state <= next_state;
  
-// ¸ù¾ÝÌõ¼þ×ªÒÆ×´Ì¬
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½×´Ì¬
 always @ (*)
   case (current_state)
-    NO_KEY_PRESSED :                    // Ã»ÓÐ°´¼ü°´ÏÂ
+    NO_KEY_PRESSED :                    // Ã»ï¿½Ð°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (row != 4'hF)
           next_state = SCAN_COL0;
         else
           next_state = NO_KEY_PRESSED;
-    SCAN_COL0 :                         // É¨ÃèµÚ0ÁÐ 
+    SCAN_COL0 :                         // É¨ï¿½ï¿½ï¿½0ï¿½ï¿½ 
         if (row != 4'hF)
           next_state = KEY_PRESSED;
         else
           next_state = SCAN_COL1;
-    SCAN_COL1 :                         // É¨ÃèµÚ1ÁÐ 
+    SCAN_COL1 :                         // É¨ï¿½ï¿½ï¿½1ï¿½ï¿½ 
         if (row != 4'hF)
           next_state = KEY_PRESSED;
         else
           next_state = SCAN_COL2;    
-    SCAN_COL2 :                         // É¨ÃèµÚ2ÁÐ
+    SCAN_COL2 :                         // É¨ï¿½ï¿½ï¿½2ï¿½ï¿½
         if (row != 4'hF)
           next_state = KEY_PRESSED;
         else
           next_state = SCAN_COL3;
-    SCAN_COL3 :                         // É¨ÃèµÚ3ÁÐ
+    SCAN_COL3 :                         // É¨ï¿½ï¿½ï¿½3ï¿½ï¿½
         if (row != 4'hF)
           next_state = KEY_PRESSED;
         else
           next_state = NO_KEY_PRESSED;
-    KEY_PRESSED :                       // ÓÐ°´¼ü°´ÏÂ
+    KEY_PRESSED :                       // ï¿½Ð°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (row != 4'hF)
           next_state = KEY_PRESSED;
         else
           next_state = NO_KEY_PRESSED;                      
   endcase
  
-reg       key_pressed_flag;             // ¼üÅÌ°´ÏÂ±êÖ¾
-reg [3:0] col_val, row_val;             // ÁÐÖµ¡¢ÐÐÖµ
+reg       key_pressed_flag;             // ï¿½ï¿½ï¿½Ì°ï¿½ï¿½Â±ï¿½Ö¾
+reg [3:0] col_val, row_val;             // ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½Öµ
  
-// ¸ù¾Ý´ÎÌ¬£¬¸øÏàÓ¦¼Ä´æÆ÷¸³Öµ
+// ï¿½ï¿½ï¿½Ý´ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
 always @ (posedge key_clk or posedge rst)
   if (rst)
   begin
@@ -111,33 +92,33 @@ always @ (posedge key_clk or posedge rst)
   end
   else
     case (next_state)
-      NO_KEY_PRESSED :                  // Ã»ÓÐ°´¼ü°´ÏÂ
+      NO_KEY_PRESSED :                  // Ã»ï¿½Ð°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
       begin
         col              <= 4'h0;
-        key_pressed_flag <=    0;       // Çå¼üÅÌ°´ÏÂ±êÖ¾
+        key_pressed_flag <=    0;       // ï¿½ï¿½ï¿½ï¿½Ì°ï¿½ï¿½Â±ï¿½Ö¾
       end
-      SCAN_COL0 :                       // É¨ÃèµÚ0ÁÐ
+      SCAN_COL0 :                       // É¨ï¿½ï¿½ï¿½0ï¿½ï¿½
         col <= 4'b1110;
-      SCAN_COL1 :                       // É¨ÃèµÚ1ÁÐ
+      SCAN_COL1 :                       // É¨ï¿½ï¿½ï¿½1ï¿½ï¿½
         col <= 4'b1101;
-      SCAN_COL2 :                       // É¨ÃèµÚ2ÁÐ
+      SCAN_COL2 :                       // É¨ï¿½ï¿½ï¿½2ï¿½ï¿½
         col <= 4'b1011;
-      SCAN_COL3 :                       // É¨ÃèµÚ3ÁÐ
+      SCAN_COL3 :                       // É¨ï¿½ï¿½ï¿½3ï¿½ï¿½
         col <= 4'b0111;
-      KEY_PRESSED :                     // ÓÐ°´¼ü°´ÏÂ
+      KEY_PRESSED :                     // ï¿½Ð°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
       begin
-        col_val          <= col;        // Ëø´æÁÐÖµ
-        row_val          <= row;        // Ëø´æÐÐÖµ
-        key_pressed_flag <= 1;          // ÖÃ¼üÅÌ°´ÏÂ±êÖ¾  
+        col_val          <= col;        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+        row_val          <= row;        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+        key_pressed_flag <= 1;          // ï¿½Ã¼ï¿½ï¿½Ì°ï¿½ï¿½Â±ï¿½Ö¾  
       end
     endcase
 //--------------------------------------
-// ×´Ì¬»ú²¿·Ö ½áÊø
+// ×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 //--------------------------------------
  
  
 //++++++++++++++++++++++++++++++++++++++
-// É¨ÃèÐÐÁÐÖµ²¿·Ö ¿ªÊ¼
+// É¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ê¼
 //++++++++++++++++++++++++++++++++++++++
 reg [3:0] keyboard_val;
 always @ (posedge key_clk or posedge rst)
@@ -167,7 +148,7 @@ always @ (posedge key_clk or posedge rst)
         8'b0111_0111 : keyboard_val <= 4'hD;        
       endcase
 //--------------------------------------
-//  É¨ÃèÐÐÁÐÖµ²¿·Ö ½áÊø
+//  É¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 //--------------------------------------
 assign keyboardval=keyboard_val;
 endmodule

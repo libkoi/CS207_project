@@ -1,23 +1,6 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: SUSTech
-// Engineer: Chen Yuheng
-// 
-// Create Date: 2018/12/12 15:38:53
-// Design Name: 
-// Module Name: Clock
-// Project Name: Alarm Clock
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
+
+
 module clock(
     input clk, 
     rst,

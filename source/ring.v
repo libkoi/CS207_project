@@ -1,4 +1,5 @@
 `timescale 1ns / 1ps
+
 module ring(
     input on,clk,[19:0]sound,
     output reg speak

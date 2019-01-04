@@ -1,30 +1,10 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 2018/12/23 14:51:31
-// Design Name: 
-// Module Name: StateMachine
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
 
 module StateMachine(
     input clk,
     input rst,
     input change,
-    input next,//ÇĞ»»ÉèÖÃÊıÎ»
+    input next, //next digit switch
     input on,
     input h,
     input min,
@@ -42,23 +22,25 @@ module StateMachine(
     //output reg[2:0] twink
 );
 
-    reg state;
-    reg set_time;
-    wire [5:0] reg_hour;
-    wire [5:0] reg_minute;
-    wire [5:0] reg_second;
-    wire [5:0] key_hour;
-    wire [5:0] key_minute;
-    wire [2:0] twinkle;
-    reg start;
+reg state;
+reg set_time;
+wire [5:0] reg_hour;
+wire [5:0] reg_minute;
+wire [5:0] reg_second;
+wire [5:0] key_hour;
+wire [5:0] key_minute;
+wire [2:0] twinkle;
+reg start;
 
-    clock c(clk,rst,h,min,set_time,key_hour,key_minute,reg_hour,reg_minute,reg_second);
-    display d(rst,clk,reg_hour,reg_minute,reg_second,seg_out,seg_en);
+clock c(clk,rst,h,min,set_time,key_hour,key_minute,reg_hour,reg_minute,reg_second);
+display d(rst,clk,reg_hour,reg_minute,reg_second,seg_out,seg_en);
 
   //  naoning nao(on,clk,reg_hour,reg_minute,reg_second,speak);
-    sound sd(on,clk,reg_hour,reg_minute,reg_second,speak);
-    SetTime st(clk,rst,start,next,row,col,key_hour,key_minute,twinkle);
-    always @(posedge clk)
+
+sound sd(on,clk,reg_hour,reg_minute,reg_second,speak);
+SetTime st(clk,rst,start,next,row,col,key_hour,key_minute,twinkle);
+
+always @(posedge clk)
     sound_on=on;
 
 
@@ -95,7 +77,7 @@ module StateMachine(
 //    end
 
 
-    always @(posedge clk)
+always @(posedge clk)
     begin
         hour=reg_hour;
         minute=reg_minute;
