@@ -3,21 +3,23 @@
 module sound(
     input on,clk,
     input [5:0] hour,[5:0] min,[5:0] sec,
+    input [5:0] alhour, [5:0] almin,
     output speak
 );
 
-reg[19:0] sound;
+reg [19:0] sound;
 reg  ringing = 1;    
 
 ring  a(on, clk, sound, speak);
 
 //////////////////////////////////////////////////////////
-// alarm start at xx:01:00, like this: 
+// alarm like this: 
 // 3--1--2--5(-)----|5(-)--2--3--1----|5(-)----5(-)----5(-)----
+// time is defined by input "alhour" and "almin"
 
 always@ (posedge clk)
 begin
-    if(min == 6'd1)
+    if(alhour == hour && almin == min)
     begin
         case(sec)
             6'd0: sound = 20'd113636;
