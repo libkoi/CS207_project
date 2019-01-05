@@ -19,7 +19,7 @@ module clock(
 
 wire clk_bps;
 wire clk_fbps;
-reg[5:0] reg_hour,reg_minute,reg_second;
+reg [5:0] reg_hour, reg_minute, reg_second;
     
 counter u_c(clk,rst,clk_bps);
 counter_tube u_t(clk,rst,clk_fbps);
