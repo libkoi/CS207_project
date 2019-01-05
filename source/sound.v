@@ -14,7 +14,7 @@ ring  a(on, clk, sound, speak);
 
 //////////////////////////////////////////////////////////
 // alarm like this: 
-// 3--1--2--5(-)----|5(-)--2--3--1----|5(-)----5(-)----5(-)----
+// 6--4--5--1----|1--5--6--4----|1----1----1----
 // time is defined by input "alhour" and "almin"
 
 always@ (posedge clk)
@@ -53,7 +53,7 @@ end
 
 
 //////////////////////////////////////////////////////////
-// Single "di" ring, relevent to current hour
+// Single "di" ring, relevent to current hour (in 12-hour clock mode)
 // also, use enum because loop is too haed for me(
 
 // i.e. for 04:00, it will heard like: 
@@ -64,6 +64,12 @@ end
     // 04:00:04 "di"
     // 04:00:05 null
     // 04:00:06 "di"
+    // 04:00:07 null
+// i.e. for 14:00, it will heard like: 
+    // 14:00:00 "di"
+    // 14:00:01 null
+    // 14:00:02 "di"
+    // 14:00:03 null
 
 always@ (posedge clk)
     begin
