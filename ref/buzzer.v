@@ -5,7 +5,7 @@
 // 
 // Create Date: 2018/12/12 22:37:43
 // Design Name: 
-// Module Name: fengmingqi
+// Module Name: buzzer
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module fengmingqi(input clk,rst,t,output f);
+module buzzer(input clk,rst,t,output f);
 reg f1;
 wire clk_bps,f;
 counter2 u_c(clk,rst,clk_bps);
