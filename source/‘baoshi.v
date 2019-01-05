@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module clock(
+module clock_test(
     input on, clk,
     input [5:0] min, [5:0]sec, [5:0] hour,
     output speak

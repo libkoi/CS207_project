@@ -43,7 +43,7 @@ wire [5:0] reg_second;
 
 // reg start;
 
-clock c(clk, rst, h, min, set_time, key_hour, key_minute, reg_hour,r eg_minute, reg_second);
+clock c(clk, rst, h, min, set_time, key_hour, key_minute, reg_hour, reg_minute, reg_second);
 display d(rst, clk, reg_hour, reg_minute, reg_second, seg_out, seg_en);
 
   //  naoning nao(on,clk,reg_hour,reg_minute,reg_second,speak);
@@ -56,8 +56,10 @@ sound sd(sound_on, clk, reg_hour, reg_minute, reg_second, speak);
 //////////////////////////////////////////////////////////
 // Use led to show current sound/alarm switch status
 always @(posedge clk)
-    sound_on_led = sound_on;
-    alarm_on_led = alarm_on;
+    begin
+        sound_on_led = sound_on;
+        alarm_on_led = alarm_on;
+    end
 
 //////////////////////////////////////////////////////////
 
