@@ -2,9 +2,9 @@
 
 
 module get_key(
-  input           clk,
-  input           rst,
-  input      [3:0] row,                 // ������� ��
+  input clk,
+  input rst,
+  input [3:0] row,                 // ������� ��
   output reg[3:0] col,
   output[3:0] keyboardval//ֱ������Ĳ���
 );

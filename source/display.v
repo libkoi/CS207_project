@@ -16,6 +16,7 @@ reg [31:0] cnt;
 parameter period = 200000;  // 500Hz for stable
 
 reg [7:0] DIG_r;            // for one digit
+
 assign seg_out = Xseg_out;
 assign seg_en = ~DIG_r;
 
@@ -38,6 +39,11 @@ reg [7:0] sl_r;
 //////////////////////////////////////////////////////////
 // display convert toolkit
 // [5:0] time --> [3:0] digit
+
+// i.e. hour = 6'b010011 = 19(dec)
+// hour ==> hh (high digit) = 1
+// hour ==> hl (low digit) = 9
+
 always @(posedge clk or posedge rst)
 begin
     if(rst) begin
@@ -60,6 +66,8 @@ end
 
 
 reg clkout;
+//////////////////////////////////////////////////////////
+
 //////////////////////////////////////////////////////////
 // frequency division 
 // clk --> clkout
@@ -107,7 +115,7 @@ begin
         3'd3 : DIG_r = 8'b0000_1000;
         3'd4 : DIG_r = 8'b0001_0000;
         3'd5 : DIG_r = 8'b0010_0000;
-        default: DIG_r = 8'b0000_0000;
+        default: DIG_r = 8'b0000_0000; // 6/7 are disabled
     endcase
 end
 //////////////////////////////////////////////////////////
@@ -115,6 +123,8 @@ end
 
 reg [3:0] Q;
 
+//////////////////////////////////////////////////////////
+// use Q for tmp store variable
 always @(scan_cnt)
 begin
     case (scan_cnt)
@@ -126,9 +136,13 @@ begin
         3'd5: Q = hh;
     endcase
 end
+//////////////////////////////////////////////////////////
 
 reg [7:0] Xseg_out;
 
+
+//////////////////////////////////////////////////////////
+// Dispaly selected number follow the rule
 always @(Q)
 begin
     case (Q[3:0])
@@ -145,5 +159,6 @@ begin
         default:  Xseg_out<=8'b11111111;
     endcase
 end
+//////////////////////////////////////////////////////////
 
 endmodule

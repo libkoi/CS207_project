@@ -17,21 +17,21 @@ module SetTime(
 wire[3:0] val;
 reg[5:0] hour,minute;
 reg[2:0] twinkle;
-get_key u(clk,rst,row,col,val);
+get_key u(clk, rst, row, col, val);
 
 always @(posedge next or posedge start)
 begin
     if(start)
-    twinkle=3'b000;
+    twinkle = 3'b000;
     else
     begin
     case(twinkle)
-        3'b000:hour=val*10;
-        3'b001:hour=hour+val;
-        3'b010:minute=val*10;
-        3'b011:minute=minute+val;
+        3'b000:hour = val * 10;
+        3'b001:hour = hour + val;
+        3'b010:minute = val * 10;
+        3'b011:minute = minute + val;
     endcase
-    twinkle=twinkle+3'b001;
+    twinkle = twinkle + 3'b001;
     end
 end
 endmodule
