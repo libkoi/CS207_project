@@ -1,11 +1,3 @@
-set_property IOSTANDARD LVCMOS33 [get_ports {col[3]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {col[2]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {col[1]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {col[0]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {row[3]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {row[2]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {row[1]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {row[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {seg_en[7]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {seg_en[6]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {seg_en[5]}]
@@ -26,8 +18,6 @@ set_property IOSTANDARD LVCMOS33 [get_ports clk]
 set_property IOSTANDARD LVCMOS33 [get_ports rst]
 set_property IOSTANDARD LVCMOS33 [get_ports h]
 set_property IOSTANDARD LVCMOS33 [get_ports min]
-set_property IOSTANDARD LVCMOS33 [get_ports change]
-set_property IOSTANDARD LVCMOS33 [get_ports on]
 set_property IOSTANDARD LVCMOS33 [get_ports speak]
 set_property IOSTANDARD LVCMOS33 [get_ports next]
 set_property IOSTANDARD LVCMOS33 [get_ports sound_on]
@@ -56,24 +46,13 @@ set_property IOSTANDARD LVCMOS33 [get_ports {second[2]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {second[1]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {second[0]}]
 
-set_property IOSTANDARD LVCMOS33 [get_ports {twink[2]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {twink[1]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {twink[0]}]
 
 
 
 
 
 
-set_property PACKAGE_PIN M2 [get_ports {col[3]}]
-set_property PACKAGE_PIN K6 [get_ports {col[2]}]
-set_property PACKAGE_PIN J6 [get_ports {col[1]}]
-set_property PACKAGE_PIN L5 [get_ports {col[0]}]
 
-set_property PACKAGE_PIN K4 [get_ports {row[3]}]
-set_property PACKAGE_PIN J4 [get_ports {row[2]}]
-set_property PACKAGE_PIN L3 [get_ports {row[1]}]
-set_property PACKAGE_PIN K3 [get_ports {row[0]}]
 
 
 
@@ -113,14 +92,11 @@ set_property PACKAGE_PIN E13 [get_ports {seg_out[7]}]
 
 set_property PACKAGE_PIN Y18 [get_ports clk]
 set_property PACKAGE_PIN P20 [get_ports rst]
-set_property PACKAGE_PIN P4 [get_ports change]
-set_property PACKAGE_PIN W4 [get_ports on]
 set_property PACKAGE_PIN A19 [get_ports speak]
 set_property PACKAGE_PIN R1 [get_ports min]
 set_property PACKAGE_PIN P1 [get_ports h]
-set_property PACKAGE_PIN A21 [get_ports sound_on]
+set_property PACKAGE_PIN W4 [get_ports sound_on]
 
-#≤‚ ‘”√
 
 #set_property PACKAGE_PIN K17 [get_ports {val[0]}]
 #set_property PACKAGE_PIN L13 [get_ports {val[1]}]
@@ -146,12 +122,7 @@ set_property PACKAGE_PIN D21 [get_ports {second[2]}]
 set_property PACKAGE_PIN E21 [get_ports {second[1]}]
 set_property PACKAGE_PIN D22 [get_ports {second[0]}]
 
-set_property PACKAGE_PIN N19 [get_ports {twink[2]}]
-set_property PACKAGE_PIN L14 [get_ports {twink[1]}]
-set_property PACKAGE_PIN J17 [get_ports {twink[0]}]
 
-set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets reset_IBUF]
-set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets next_IBUF]
 #set_property MARK_DEBUG true [get_nets {row_IBUF[0]}]
 #set_property MARK_DEBUG true [get_nets {row_IBUF[1]}]
 #set_property MARK_DEBUG true [get_nets {row_IBUF[2]}]
@@ -194,3 +165,38 @@ set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets next_IBUF]
 #set_property C_ENABLE_CLK_DIVIDER false [get_debug_cores dbg_hub]
 #set_property C_USER_SCAN_CHAIN 1 [get_debug_cores dbg_hub]
 #connect_debug_port dbg_hub/clk [get_nets clk_IBUF_BUFG]
+
+
+set_property IOSTANDARD LVCMOS33 [get_ports alarm_on]
+set_property IOSTANDARD LVCMOS33 [get_ports alarm_on_led]
+set_property IOSTANDARD LVCMOS33 [get_ports sound_on_led]
+set_property PACKAGE_PIN A21 [get_ports sound_on_led]
+set_property PACKAGE_PIN R4 [get_ports alarm_on]
+set_property PACKAGE_PIN E22 [get_ports alarm_on_led]
+set_property PACKAGE_PIN T4 [get_ports next]
+
+
+set_property IOSTANDARD LVCMOS33 [get_ports {alhour[5]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {alhour[4]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {alhour[3]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {alhour[2]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {alhour[1]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {alhour[0]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {alminute[5]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {alminute[4]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {alminute[3]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {alminute[2]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {alminute[1]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {alminute[0]}]
+set_property PACKAGE_PIN Y9 [get_ports {alhour[5]}]
+set_property PACKAGE_PIN W9 [get_ports {alhour[4]}]
+set_property PACKAGE_PIN Y7 [get_ports {alhour[3]}]
+set_property PACKAGE_PIN Y8 [get_ports {alhour[2]}]
+set_property PACKAGE_PIN AB8 [get_ports {alhour[1]}]
+set_property PACKAGE_PIN AA8 [get_ports {alhour[0]}]
+set_property PACKAGE_PIN V8 [get_ports {alminute[5]}]
+set_property PACKAGE_PIN V9 [get_ports {alminute[4]}]
+set_property PACKAGE_PIN AB6 [get_ports {alminute[3]}]
+set_property PACKAGE_PIN AB7 [get_ports {alminute[2]}]
+set_property PACKAGE_PIN V7 [get_ports {alminute[1]}]
+set_property PACKAGE_PIN AA6 [get_ports {alminute[0]}]
