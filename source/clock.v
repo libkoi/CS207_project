@@ -12,9 +12,6 @@ module clock(
 );
 
 
-// Four timeset input represent hour(high/low digit), minute(high/low digit)
-// A stands for "not need for set"
-// NO illegal input time detect, they will be fixed before input
 // Binary output for hour/minute/second
 
 wire clk_bps;
@@ -33,24 +30,6 @@ always @(posedge clk)
         second = reg_second;
     end
 
-// Tested but not work... sad
-
-// always @(posedge clk or posedge rst)
-//     begin
-//         if(rst) begin
-//             reg_hour <=6'b0;
-//             reg_minute <=6'b0;
-//             reg_second <=6'b0;
-//             hour <=6'b0;
-//             minute <=6'b0;
-//             second <=6'b0;
-//         end
-//         else begin
-//             hour = reg_hour;
-//             minute = reg_minute;
-//             second = reg_second;
-//         end
-//     end
 //////////////////////////////////////////////////////////
 
 
@@ -172,7 +151,8 @@ endmodule
 //////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////
-// 0.05 s per posedge
+// Jump frequency when setting time via buttom
+// 0.25 s per posedge
 module counter_tube(input clk, rst, output clk_bps_tube);
     reg [13:0] cnt_first, cnt_second;
     always @(posedge clk or posedge rst)
