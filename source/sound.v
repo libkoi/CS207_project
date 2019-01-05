@@ -225,3 +225,32 @@ always@ (posedge clk)
 //////////////////////////////////////////////////////////
 
 endmodule
+
+
+module ring(
+    input on, clk, [19:0] sound,
+    output reg speak // connected to buzzer
+);
+
+reg [19:0] counter;
+
+//////////////////////////////////////////////////////////
+//ring control module
+always @(posedge clk)
+    begin
+    if(on)
+        begin
+            if(counter >= sound) 
+            begin
+                counter <= 0; 
+                if(speak == 1)
+                    speak <= 0;
+                else speak <= 1;
+            end
+            else counter <= counter + 1;
+        end
+    else speak <= 0;
+    end
+//////////////////////////////////////////////////////////
+
+endmodule
